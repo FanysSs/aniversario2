@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Contador — Nuestro Álbum 💙{% endblock %}
+
+{% block content %}
+<div class="page-inner">
+  <div class="page-header">
+    <p class="eyebrow">tiempo a tu lado</p>
+    <h1 class="page-title">Llevamos juntas…</h1>
+  </div>
+
+  <div class="paper-card counter-card">
+    <span class="washi washi-tl"></span>
+    <span class="washi washi-br washi-peach"></span>
+
+    <div class="counter" data-target="{{ fecha_iso }}">
+      <div class="cnt-box">
+        <span class="cnt-num" id="cnt-days">--</span>
+        <span class="cnt-label">días</span>
+      </div>
+      <span class="cnt-sep">:</span>
+      <div class="cnt-box">
+        <span class="cnt-num" id="cnt-hours">--</span>
+        <span class="cnt-label">horas</span>
+      </div>
+      <span class="cnt-sep">:</span>
+      <div class="cnt-box">
+        <span class="cnt-num" id="cnt-mins">--</span>
+        <span class="cnt-label">minutos</span>
+      </div>
+      <span class="cnt-sep">:</span>
+      <div class="cnt-box">
+        <span class="cnt-num" id="cnt-secs">--</span>
+        <span class="cnt-label">segundos</span>
+      </div>
+    </div>
+
+    <p class="counter-quote script">…y cada segundo me gustas un poquito más. </p>
+
+    <div class="counter-milestones">
+      <div class="milestone" id="ms-weeks">
+        <span class="ms-num">--</span>
+        <span class="ms-label">semanas</span>
+      </div>
+      <div class="milestone" id="ms-hours-total">
+        <span class="ms-num">--</span>
+        <span class="ms-label">horas totales</span>
+      </div>
+      <div class="milestone" id="ms-mins-total">
+        <span class="ms-num">--</span>
+        <span class="ms-label">minutos totales</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="page-back">
+    <a href="{{ url_for('home') }}" data-nav class="back-link">← Volver</a>
+  </p>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/counter.js') }}"></script>
+{% endblock %}

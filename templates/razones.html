@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}100 Razones — Nuestro Álbum 💙{% endblock %}
+
+{% block content %}
+<div class="page-inner">
+  <div class="page-header">
+    <p class="eyebrow">para que nunca lo olvides</p>
+    <h1 class="page-title">100 razones por las que te quiero</h1>
+    <p class="page-sub">Toca cualquier número para descubrir una. ✨</p>
+  </div>
+
+  <div class="reasons-grid" id="reasonsGrid"></div>
+
+  <div class="reasons-modal" id="reasonsModal" aria-hidden="true">
+    <div class="reasons-card">
+      <button class="modal-close" id="reasonsClose" aria-label="Cerrar">×</button>
+      <p class="reason-num" id="reasonNum">#1</p>
+      <p class="reason-text" id="reasonText"></p>
+      <span class="reason-heart">💙</span>
+    </div>
+  </div>
+
+  <p class="page-back">
+    <a href="{{ url_for('home') }}" data-nav class="back-link">← Volver</a>
+  </p>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{# Las razones vienen desde data/razones.json vía Flask #}
+<script>
+const RAZONES_DATA = {{ razones_json | safe }};
+</script>
+<script src="{{ url_for('static', filename='js/reasons.js') }}"></script>
+{% endblock %}

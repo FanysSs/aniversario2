@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block title %}Inicio — Nuestra Página 💙{% endblock %}
+
+{% block content %}
+<div class="home-hero">
+  <!-- Video de fondo -->
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="{{ url_for('static', filename='videos/fondo.mp4') }}" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+
+  <!-- Flores fallback -->
+  <div class="hero-flowers" aria-hidden="true">
+    <span style="top:12%;left:7%">🌸</span>
+    <span style="top:25%;left:88%;font-size:3rem">🌷</span>
+    <span style="top:70%;left:5%;font-size:2rem">💙</span>
+    <span style="top:78%;left:82%">✨</span>
+    <span style="top:18%;left:55%;font-size:1.8rem">🌼</span>
+  </div>
+
+  <div class="hero-text">
+    <p class="eyebrow">— nuestra página —</p>
+    <h1 class="hero-title">
+      <span class="line">Mi lugar</span>
+      <span class="line script">favorito</span>
+      <span class="line">eres tú.</span>
+    </h1>
+    <p class="hero-date">Desde el {{ fecha_legible }}</p>
+  </div>
+</div>
+
+<!-- Menú de tarjetas tipo polaroid -->
+<section class="home-menu">
+  <p class="eyebrow center">¿a dónde quieres ir?</p>
+  <h2 class="section-title center">Nuestro espacio</h2>
+
+  <div class="menu-grid">
+
+    <a class="menu-card" href="{{ url_for('contador') }}" data-nav style="--rot:-3deg">
+      <div class="menu-card-tape"></div>
+      <span class="menu-emoji">⏳</span>
+      <span class="menu-label">Contador</span>
+      <span class="menu-sub">Tiempo a tu lado</span>
+    </a>
+
+    <a class="menu-card" href="{{ url_for('carta') }}" data-nav style="--rot:2deg">
+      <div class="menu-card-tape"></div>
+      <span class="menu-emoji">💌</span>
+      <span class="menu-label">Carta</span>
+      <span class="menu-sub">Una carta para ti</span>
+    </a>
+
+    <a class="menu-card" href="{{ url_for('galeria') }}" data-nav style="--rot:-2deg">
+      <div class="menu-card-tape"></div>
+      <span class="menu-emoji">🖼️</span>
+      <span class="menu-label">Galería</span>
+      <span class="menu-sub">Fotos y videos</span>
+    </a>
+
+    <a class="menu-card" href="{{ url_for('playlist') }}" data-nav style="--rot:3deg">
+      <div class="menu-card-tape"></div>
+      <span class="menu-emoji">🎵</span>
+      <span class="menu-label">Playlist</span>
+      <span class="menu-sub">Nuestra música</span>
+    </a>
+
+    <a class="menu-card" href="{{ url_for('razones') }}" data-nav style="--rot:-4deg">
+      <div class="menu-card-tape"></div>
+      <span class="menu-emoji">💯</span>
+      <span class="menu-label">100 Razones</span>
+      <span class="menu-sub">Por las que te quiero</span>
+    </a>
+
+    <a class="menu-card" href="{{ url_for('mapa') }}" data-nav style="--rot:2deg">
+      <div class="menu-card-tape"></div>
+      <span class="menu-emoji">🗺️</span>
+      <span class="menu-label">Mapa</span>
+      <span class="menu-sub">Nuestra distancia</span>
+    </a>
+
+    <a class="menu-card menu-card-wide" href="{{ url_for('juego') }}" data-nav style="--rot:-1deg">
+      <div class="menu-card-tape"></div>
+      <span class="menu-emoji">🎮</span>
+      <span class="menu-label">Minijuego</span>
+      <span class="menu-sub">El viaje de Fany a Minatitlán ✨</span>
+    </a>
+
+    <a class="menu-card menu-card-wide" href="{{ url_for('notas') }}" data-nav style="--rot:1deg">
+      <div class="menu-card-tape"></div>
+      <span class="menu-emoji">📝</span>
+      <span class="menu-label">Notas Guardadas</span>
+      <span class="menu-sub">Mensajes de las dos, para siempre 💙</span>
+    </a>
+
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Una sorpresa para ti 💙{% endblock %}
+{% block body_class %}unlock-body{% endblock %}
+
+{% block nav %}{% endblock %}
+{% block music %}{% endblock %}
+
+{% block content %}
+<video class="unlock-video" autoplay muted loop playsinline>
+  <source src="{{ url_for('static', filename='videos/unlock.mp4') }}" type="video/mp4">
+</video>
+<!-- Pétalos flotantes -->
+<div class="petal-stage" aria-hidden="true">
+  {% for i in range(8) %}
+  <span class="petal petal-{{ i }}">{{ ['🌸','💙','✨','🌷','💫','🤍','🌼','⭐'][i] }}</span>
+  {% endfor %}
+</div>
+
+<div class="unlock-stage">
+  <div class="unlock-card">
+    <span class="corner tl"></span>
+    <span class="corner tr"></span>
+    <span class="corner bl"></span>
+    <span class="corner br"></span>
+
+    <p class="eyebrow">— para ti —</p>
+
+    <h1 class="unlock-title">
+      <span>Hay una fecha</span>
+      <em class="script">que solo tú y yo</em>
+      <span>recordamos</span>
+    </h1>
+
+    <p class="unlock-sub">
+      Escríbela aquí para abrir nuestro pequeño rincón del mundo.
+    </p>
+
+    <form id="unlockForm" class="unlock-form" autocomplete="off">
+      <input
+        type="text"
+        id="fechaInput"
+        placeholder="DD/MM/AAAA"
+        inputmode="numeric"
+        maxlength="10"
+        required
+        aria-label="Fecha especial"
+      />
+      <button type="submit" class="btn-primary">
+        Abrir
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </button>
+    </form>
+
+    <p id="unlockMsg" class="unlock-msg" role="status" aria-live="polite"></p>
+
+    <p class="unlock-hint">Pista: el día que cambió todo.</p>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/unlock.js') }}"></script>
+{% endblock %}

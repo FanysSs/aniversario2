@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}Carta — Nuestro Álbum 💙{% endblock %}
+
+{% block content %}
+<div class="page-inner">
+  <div class="page-header">
+    <p class="eyebrow">algo que quería decirte</p>
+    <h1 class="page-title">Una carta para ti</h1>
+    <p class="page-sub">Toca el sobre para abrirla.</p>
+  </div>
+
+  <div class="envelope-scene">
+
+    <!-- Sobre -->
+    <div class="envelope" id="envelope" tabindex="0" role="button" aria-label="Abrir carta">
+      <div class="env-back"></div>
+      <div class="env-flap" id="envFlap"></div>
+      <div class="env-body">
+        <div class="env-heart">💙</div>
+        <p class="env-hint script">toca para abrir</p>
+      </div>
+    </div>
+
+    <!-- Carta (se despliega al abrir el sobre) -->
+    <article class="letter" id="letter" aria-hidden="true">
+      <!-- Líneas de papel decorativas -->
+      <div class="letter-lines" aria-hidden="true"></div>
+
+      <!--
+        ✏️ EDITA ESTE TEXTO para escribir tu propia carta.
+           Puedes cambiar lo que quieras dentro de los <p>.
+      -->
+      <p class="letter-date">{{ fecha_legible }} · para siempre</p>
+      <h2 class="letter-hello script">Hola, mi corazón hermoso.</h2>
+
+      <p>
+        Ya son dos meses contigo mi niña hermosa, y aunque en realidad parece poco tiempo, contigo todo se ha sentido muchísimo más grande y profundo, desde que nos conocimos hubo una conexión tan fuerte entre nosotras que a veces siento como si lleváramos años juntas. Como si hubiéramos encajado desde el principio de una manera muy rara y muy bonita que no había sentido antes, y antes de todo lo demás, quiero decirte que espero de verdad que te haya gustado la página web que hice para ti, y es una demostración de lo poquito que puedo hacer de mi carrera a un amor hacia ti. Y se que conocerte no se siente como una pura coincidencia, sino un hogar al que siempre pertenecí.
+      </p>
+      <p>
+        Desde que llegaste, todo tuvo un sentimiento distinto, aún más intenso, la conexión entre nosotras fue inmediata, silenciosa y enorme, como esas cosas que no necesitan explicación porque el corazón las reconoce antes que la mente. Y aunque hemos atravesado problemas grandes, tormentas que por momentos parecían demasiado fuertes, aquí seguimos, sosteniéndonos entre las grietas, eligiéndonos incluso cuando el orgullo, el ego o los impulsos intentan levantar distancia entre nosotras.
+      </p>
+      <p>
+        No quiero que las peleas ganen jamás sobre el amor que nos tenemos, no quiero que un momento de enojo tenga más peso que todos los sueños que imaginamos juntas. Quiero aprender contigo, mejorar contigo. Ser una mujer capaz de cuidar este amor de la forma en que merece ser cuidado, porque te amo de una manera que no me deja imaginar otro futuro que no seas tú.
+      </p>
+      <p>
+        Y es que no puedo pensar en nadie más ocupando tu lugar, nadie más podría hacerme sentir lo que siento cuando estoy contigo, cuando paso días contigo en tu depa y todo parece tan simple y tan perfecto a la vez. Me gusta despertar ahí, verte hacer cualquier cosa, escucharte hablarme de cualquier cosa, compartir silencios, comidas, risas pequeñas y planes que salgan de la nada. Porque en esos momentos siento que así se vería nuestra vida juntas, tranquila, imperfecta a veces, pero llena de amor. Y la verdad es que nunca me aburriría de eso, nunca me aburriría de ti. Ni de nuestras conversaciones diarias, ni de las cosas pequeñas que hacemos, ni de verte cada día como si todavía fuera la primera vez.
+      </p>
+      <p>
+        He amado profundamente cada instante que hemos compartido, los momentos felices, los difíciles, los vulnerables. Porque me importa todo de ti. Tu corazón, tus miedos, tu sensibilidad, tu familia, las cosas que te preocupan cuando nadie más las nota. Me importa cada parte de ti, incluso las que intentas esconder del mundo. Y quiero que recuerdes siempre que en mí tendrás un soporte de vida, alguien que jamás dejará de sostener tu mano cuando sientas cansancio y pienses que ya no puedes más, ahí estaré yo.
+      </p>
+      <p>
+        Me hace feliz motivarte, verte seguir adelante, recordarte lo valiosa y fuerte que eres, quiero ser esa voz que te recuerde que nunca debes rendirte, porque el mundo es mucho más bello con tu existencia dentro de él. Y tú, amor mío, eres la mujer más hermosa que mis ojos podrían haber encontrado jamás, no hablo solo de físicamente, hablo de tu alma, de la manera en que amas, de cómo haces sentir a quienes te rodean y de tu corazón.
+      </p>
+      <p>
+        Quiero todo contigo. Las mañanas lentas, las metas cumplidas, los días difíciles, las reconciliaciones, los viajes, los sueños, un hogar, una vida compartida. Quiero un día mirarte y saber que después de todos los caminos, terminé exactamente donde debía estar: contigo. 
+      </p>
+      <p>
+        Quiero casarme contigo y seguir eligiéndote incluso cuando los años pasen sobre nosotras y lleguen mil cosas nuevas.
+      </p>
+      <p>
+        Porque si existe algo parecido al destino, creo que tiene tu nombre.
+      </p>
+      <p class="letter-sign script"> Tuya, siempre.</p>
+      <p class="letter-sign script">— Fany.</p>
+
+    </article>
+
+  </div>
+
+  <p class="page-back">
+    <a href="{{ url_for('home') }}" data-nav class="back-link">← Volver</a>
+  </p>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/letter.js') }}"></script>
+{% endblock %}

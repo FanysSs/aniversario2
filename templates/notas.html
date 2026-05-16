@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% block title %}Notas — Nuestro Álbum 💙{% endblock %}
+
+{% block content %}
+<div class="page-inner notes-page">
+  <div class="page-header">
+    <p class="eyebrow">mensajes guardados</p>
+    <h1 class="page-title">Nuestras notas</h1>
+    <p class="page-sub">Un lugar para decirse cosas bonitas. Para siempre. 💙</p>
+  </div>
+
+  <!-- ── Formulario para nueva nota ── -->
+  <div class="note-form-wrap">
+    <div class="paper-card note-form-card">
+      <span class="washi washi-tl"></span>
+      <span class="washi washi-br washi-peach"></span>
+
+      <h2 class="note-form-title script">Escribe una nota</h2>
+
+      <form method="POST" action="{{ url_for('notas') }}" class="note-form" id="noteForm">
+        <!-- Selector de nombre -->
+        <div class="note-field">
+          <label class="note-label">¿Quién escribe?</label>
+          <div class="name-pills">
+            <label class="name-pill">
+              <input type="radio" name="autor" value="{{ nombre_el }}" checked>
+              <span>{{ nombre_el }} 💙</span>
+            </label>
+            <label class="name-pill">
+              <input type="radio" name="autor" value="{{ nombre_ella }}">
+              <span>{{ nombre_ella }} 🌸</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Textarea del mensaje -->
+        <div class="note-field">
+          <label class="note-label" for="notaMensaje">Tu nota</label>
+          <textarea
+            id="notaMensaje"
+            name="mensaje"
+            class="note-textarea"
+            placeholder="Escribe algo bonito aquí… 💙"
+            rows="4"
+            maxlength="600"
+            required
+          ></textarea>
+          <span class="char-count" id="charCount">0 / 600</span>
+        </div>
+
+        <button type="submit" class="btn-primary note-submit">
+          Guardar nota
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ── Lista de notas guardadas ── -->
+  {% if notas %}
+  <div class="notes-list" id="notesList">
+    <p class="notes-count eyebrow center">
+      {{ notas | length }} nota{{ 's' if notas | length != 1 }} guardada{{ 's' if notas | length != 1 }}
+    </p>
+
+    {% for nota in notas %}
+    <div class="note-card note-card-{{ loop.index0 % 3 }}"
+         style="--rot: {{ (loop.index0 % 5 - 2) * 1.2 }}deg"
+         data-idx="{{ loop.index0 }}">
+
+      <!-- Tape decorativo -->
+      <span class="note-tape"></span>
+
+      <!-- Cabecera: autor + fecha -->
+      <div class="note-header">
+        <span class="note-author">
+          {% if nota.autor == nombre_el %}💙{% else %}🌸{% endif %}
+          {{ nota.autor }}
+        </span>
+        <span class="note-date">{{ nota.creado_en }}</span>
+      </div>
+
+      <!-- Mensaje -->
+      <p class="note-body">{{ nota.mensaje }}</p>
+
+      <!-- Botón de borrar (discreto) -->
+      <form method="POST" action="{{ url_for('borrar_nota', nota_id=nota.id) }}"
+            class="delete-form"
+            onsubmit="return confirm('¿Borrar esta nota?');">
+        <button type="submit" class="delete-btn" aria-label="Borrar nota" title="Borrar">×</button>
+      </form>
+    </div>
+    {% endfor %}
+  </div>
+
+  {% else %}
+  <!-- Estado vacío -->
+  <div class="notes-empty">
+    <span class="empty-icon">📝</span>
+    <p class="script">¡Aún no hay notas!</p>
+    <p>Sé la primera en escribir algo bonito. 💙</p>
+  </div>
+  {% endif %}
+
+  <p class="page-back">
+    <a href="{{ url_for('home') }}" data-nav class="back-link">← Volver</a>
+  </p>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/notes.js') }}"></script>
+{% endblock %}

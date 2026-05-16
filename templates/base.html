@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}Nuestra página{% endblock %}</title>
+
+  <!-- Fuentes: Caveat (manuscrita) + Cormorant Garamond (elegante) + Quicksand (cuerpo) + Press Start 2P (pixel game) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,500;0,600;1,400&family=Quicksand:wght@300;400;500;600&family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💙</text></svg>">
+
+  {% block extra_head %}{% endblock %}
+</head>
+<body class="page-body {% block body_class %}{% endblock %}">
+
+  <!-- Cortina de transición entre páginas -->
+  <div class="page-curtain" id="pageCurtain"></div>
+
+  <!-- Partículas flotantes globales -->
+  <div class="bg-particles" id="bgParticles" aria-hidden="true"></div>
+
+  {% block nav %}
+  <!-- Navegación fija -->
+  <nav class="topnav" id="topnav">
+    <a href="{{ url_for('home') }}" class="nav-brand" data-nav>S&amp;F</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="{{ url_for('contador') }}" data-nav>⏳ Contador</a></li>
+      <li><a href="{{ url_for('carta') }}" data-nav>💌 Carta</a></li>
+      <li><a href="{{ url_for('galeria') }}" data-nav>🖼️ Fotos</a></li>
+      <li><a href="{{ url_for('playlist') }}" data-nav>🎵 Playlist</a></li>
+      <li><a href="{{ url_for('razones') }}" data-nav>💯 Razones</a></li>
+      <li><a href="{{ url_for('mapa') }}" data-nav>🗺️ Mapa</a></li>
+      <li><a href="{{ url_for('juego') }}" data-nav>🎮 Juego</a></li>
+      <li><a href="{{ url_for('notas') }}" data-nav>📝 Notas</a></li>
+    </ul>
+  </nav>
+  {% endblock %}
+
+  {% block music %}
+  <!-- Reproductor de música flotante -->
+  <div class="music-player" id="musicPlayer" aria-label="Reproducir música de fondo">
+    <button class="music-btn" id="musicBtn" aria-label="Play/Pause">
+      <span class="music-icon">🎵</span>
+    </button>
+    <audio id="bgMusic" loop preload="none">
+      <source src="{{ url_for('static', filename='sounds/musica.mp3') }}" type="audio/mpeg">
+    </audio>
+  </div>
+  {% endblock %}
+
+  <!-- Contenido de la página -->
+  <main class="page-content" id="pageContent">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Scripts comunes -->
+  {% block scripts %}{% endblock %}
+  <script src="{{ url_for('static', filename='js/particles.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/transitions.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/nav.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/music.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/hearts.js') }}"></script>
+</body>
+</html>

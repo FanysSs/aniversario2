@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Mapa — Nuestro Álbum 💙{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+{% endblock %}
+
+{% block content %}
+<div class="page-inner">
+  <div class="page-header">
+    <p class="eyebrow">distancia</p>
+    <h1 class="page-title">Aunque estemos lejos…</h1>
+    <p class="page-sub">Hay algo que ni los kilómetros pueden romper.</p>
+  </div>
+
+  <div class="map-card">
+    <div id="distanceMap"></div>
+
+    <div class="map-stats">
+      <div class="map-city">
+        <span class="city-dot dot-blue"></span>
+        <div>
+          <strong>{{ ciudad_el }}</strong>
+          <small>tú estás aquí</small>
+        </div>
+      </div>
+
+      <div class="map-km-badge">
+        <span id="mapKm">…</span>
+        <small>km de distancia</small>
+      </div>
+
+      <div class="map-city map-city-right">
+        <div class="city-text-right">
+          <strong>{{ ciudad_ella }}</strong>
+          <small>y ella está aquí</small>
+        </div>
+        <span class="city-dot dot-rose"></span>
+      </div>
+    </div>
+  </div>
+
+  <p class="map-quote script">
+    Aunque estemos lejos, te sigo eligiendo cada día. 💙
+  </p>
+
+  <p class="page-back">
+    <a href="{{ url_for('home') }}" data-nav class="back-link">← Volver</a>
+  </p>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="{{ url_for('static', filename='js/map.js') }}"></script>
+{% endblock %}

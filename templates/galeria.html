@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block title %}Galería — Nuestro Álbum 💙{% endblock %}
+
+{% block content %}
+<div class="page-inner">
+  <div class="page-header">
+    <p class="eyebrow">recuerdos</p>
+    <h1 class="page-title">Nuestra galería</h1>
+    <p class="page-sub">Pedacitos de nosotros que no quiero olvidar.</p>
+  </div>
+
+  <div class="gallery-wrapper">
+    <button class="gallery-arrow gallery-prev" id="galleryPrev" aria-label="Anterior">‹</button>
+    <button class="gallery-arrow gallery-next" id="galleryNext" aria-label="Siguiente">›</button>
+
+    <div class="gallery-track" id="galleryTrack">
+      {% for item in items %}
+      <figure class="polaroid {% if item.tipo == 'video' %}polaroid-video{% endif %}"
+              style="--rot: {{ loop.index0 % 5 - 2 }}deg">
+
+        {% if item.tipo == 'imagen' %}
+          <div class="polaroid-media" style="background-image:url('{{ item.src }}')">
+            <span class="polaroid-ph"></span>
+          </div>
+
+        {% elif item.tipo == 'video' %}
+          <div class="polaroid-media polaroid-video-wrap">
+            <video src="{{ item.src }}" muted loop preload="metadata"
+                   class="gallery-video" playsinline></video>
+            <button class="vid-play-btn" aria-label="Reproducir video">▶</button>
+          </div>
+          <span class="vid-badge">VIDEO</span>
+
+        {% else %}
+          <div class="polaroid-media polaroid-ph-wrap">
+            <span class="polaroid-ph-big"></span>
+            <span class="polaroid-ph-txt">foto aquí</span>
+          </div>
+        {% endif %}
+
+        <figcaption class="polaroid-caption">
+          {{ item.caption or '' }}
+        </figcaption>
+
+        {% if item.tipo != 'placeholder' %}
+        <button
+          class="edit-caption-btn"
+          aria-label="Editar descripción"
+          data-src="{{ item.src }}"
+          data-caption="{{ item.caption | e }}">
+          ✏️
+        </button>
+        {% endif %}
+
+      </figure>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="gallery-dots" id="galleryDots"></div>
+  <p class="gallery-hint">← desliza o usa las flechas →</p>
+
+  <div class="upload-wrap">
+    <div class="paper-card upload-card">
+      <span class="washi washi-tl"></span>
+      <h3 class="upload-title script">Agregar un recuerdo 📸</h3>
+      <form method="POST" action="{{ url_for('subir_foto') }}"
+            enctype="multipart/form-data" class="upload-form">
+        <label class="upload-drop" id="uploadDrop">
+          <input type="file" name="archivo" id="uploadFile"
+                 accept=".jpg,.jpeg,.png,.gif,.webp,.mp4,.webm" required>
+          <span class="upload-icon">📁</span>
+          <span class="upload-text">Toca para elegir foto o video</span>
+          <span class="upload-name" id="uploadName"></span>
+        </label>
+        <input type="text" name="caption" class="upload-caption"
+               placeholder="Descripción (opcional) 💙" maxlength="120">
+        <button type="submit" class="btn-primary upload-btn">
+          Subir recuerdo
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2.2" stroke-linecap="round">
+            <path d="M5 12h14M13 5l7 7-7 7"/>
+          </svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <p class="page-back">
+    <a href="{{ url_for('home') }}" data-nav class="back-link">← Volver</a>
+  </p>
+</div>
+
+<!-- Modal editar descripción -->
+<div class="edit-modal" id="editModal" aria-hidden="true">
+  <div class="edit-modal-card paper-card">
+    <button class="modal-close" id="editClose" aria-label="Cerrar">×</button>
+    <h3 class="script edit-modal-title">Editar descripción ✏️</h3>
+    <form method="POST" action="{{ url_for('editar_descripcion') }}" class="edit-form">
+      <input type="hidden" name="src" id="editSrc">
+      <input type="text" name="caption" id="editInput" class="edit-input"
+             placeholder="Escribe una descripción 💙" maxlength="120">
+      <p class="edit-hint">Deja vacío para borrar la descripción.</p>
+      <div class="edit-btns">
+        <button type="button" class="btn-cancel" id="editCancel">Cancelar</button>
+        <button type="submit" class="btn-primary">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/gallery.js') }}"></script>
+{% endblock %}

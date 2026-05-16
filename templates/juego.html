@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Juego — Nuestro Álbum 💙{% endblock %}
+
+{% block extra_head %}
+<!-- Press Start 2P ya cargada desde base.html -->
+{% endblock %}
+
+{% block content %}
+<div class="page-inner game-page">
+  <div class="page-header">
+    <p class="eyebrow">una pequeña aventura</p>
+    <h1 class="page-title">El viaje de Fany</h1>
+    <p class="page-sub">Llega al autobús ADO para reunirte con Silvana. 💙</p>
+  </div>
+
+  <!-- Contenedor del canvas -->
+  <div class="game-container">
+    <canvas id="gameCanvas" width="640" height="360"></canvas>
+
+    <!-- Controles táctiles (móvil) -->
+    <div class="touch-controls" id="touchControls" aria-hidden="true">
+      <button class="touch-btn" id="btnUp" aria-label="Arriba">↑</button>
+      <button class="touch-btn" id="btnDown" aria-label="Abajo">↓</button>
+    </div>
+  </div>
+
+  <div class="game-instructions">
+    <span>⌨️ <strong>↑↓</strong> o <strong>WS</strong> → cambiar carril</span>
+    <span>📱 Botones ↑↓ en pantalla táctil</span>
+  </div>
+
+  <p class="page-back">
+    <a href="{{ url_for('home') }}" data-nav class="back-link">← Volver</a>
+  </p>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/game/sprites.js') }}"></script>
+<script src="{{ url_for('static', filename='js/game/game.js') }}"></script>
+{% endblock %}
