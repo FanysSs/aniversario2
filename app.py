@@ -37,7 +37,7 @@ if IS_PROD:
 
     def get_db():
         if "db" not in g:
-            g.db = psycopg2.connect(DATABASE_URL, sslmode="require")
+            g.db = psycopg2.connect(DATABASE_URL)
         return g.db
 
     @app.teardown_appcontext
